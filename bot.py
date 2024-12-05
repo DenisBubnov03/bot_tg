@@ -2,9 +2,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from commands import *
 from student_management import add_student, update_student_data, get_all_students
 from notifications import check_calls, check_payments
-
-# Токен Telegram-бота
-TELEGRAM_TOKEN = "7581276969:AAEQ8Mwj89oYNDlgQodfFDA_jDO-20i1bvo"
+import os
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 # Состояния для ConversationHandler
 TELEGRAM, FIO, FIO_OR_TELEGRAM, FIELD_TO_EDIT, START_DATE, COURSE_TYPE, TOTAL_PAYMENT, PAID_AMOUNT, WAIT_FOR_NEW_VALUE = range(9)
