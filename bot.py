@@ -1,10 +1,10 @@
 from flask import Flask
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ConversationHandler
-from commands import *
-from student_management import add_student, update_student_data, get_all_students
-from notifications import check_calls, check_payments
+from telegram.ext import Application, CommandHandler, MessageHandler, filters
+import asyncio
 import os
-import threading
+from commands import *  # Убедитесь, что импортированы все функции, включая cancel
+from student_management import *
+from notifications import *
 
 # Переменные окружения
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -71,7 +71,11 @@ def start_bot():
     application.run_polling()
 
 
-# Запуск Flask сервера и Telegram бота
 if __name__ == "__main__":
-    threading.Thread(target=start_bot).start()
+    loop = asyncio.get_event_loop()
+
+    # Запускаем бота в асинхронном режиме
+    loop.create_task(start_bot())
+
+    # Запускаем Flask сервер
     app.run(host="0.0.0.0", port=5000)
