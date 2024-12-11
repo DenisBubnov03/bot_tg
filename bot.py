@@ -5,7 +5,7 @@ import os
 from commands import *  # Убедитесь, что импортированы все функции, включая cancel
 from student_management import *
 from notifications import *
-
+app = Flask(__name__)
 # Переменные окружения
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
